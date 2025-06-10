@@ -13,11 +13,12 @@ import {
   SignedOut,
   UserButton,
 } from '@clerk/nextjs'
+import { Toaster } from "sonner";
 
 export const metadata: Metadata = {
-  title: "CodeBrain AI",
+  title: "Repolix",
   description: "", // TODO: Add a description
-  icons: [{ rel: "icon", url: "/favicon.ico" }],
+  icons: [{ rel: "icon", url: "/logo.svg" }],
 };
 
 const geist = Geist({
@@ -30,9 +31,10 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <ClerkProvider>
-      <html lang="en" className={`${geist.variable}`}>
+      <html lang="en" className={`${geist.variable}`} suppressHydrationWarning>
         <body>
           <TRPCReactProvider>{children}</TRPCReactProvider>
+          <Toaster richColors />
         </body>
       </html>
     </ClerkProvider>

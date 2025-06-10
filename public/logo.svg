@@ -1,0 +1,110 @@
+<svg viewBox="35 35 130 130" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Modern gradient for outer structure -->
+    <linearGradient id="outerGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00f5ff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0099ff;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Inner cube gradient -->
+    <linearGradient id="innerGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0066ff;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#004cff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0033cc;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Accent gradient for highlights -->
+    <linearGradient id="accentGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00ffcc;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#00ccaa;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Glow effect -->
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge> 
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Main container -->
+  <g transform="translate(100, 100)">
+    
+    <!-- Outer wireframe cube structure -->
+    <g stroke="url(#outerGradient)" stroke-width="2" fill="none" opacity="0.8">
+      <!-- Top face -->
+      <path d="M -40,-25 L 0,-45 L 40,-25 L 0,-5 Z" />
+      <!-- Bottom face -->
+      <path d="M -40,25 L 0,5 L 40,25 L 0,45 Z" />
+      <!-- Vertical edges -->
+      <line x1="-40" y1="-25" x2="-40" y2="25" />
+      <line x1="0" y1="-45" x2="0" y2="-5" />
+      <line x1="40" y1="-25" x2="40" y2="25" />
+      <line x1="0" y1="5" x2="0" y2="45" />
+    </g>
+    
+    <!-- Inner geometric structure (the main focal point) -->
+    <g>
+      <!-- Central diamond/rhombus -->
+      <path d="M 0,-25 L 20,-10 L 0,5 L -20,-10 Z" fill="url(#innerGradient)" opacity="0.9" />
+      
+      <!-- Left geometric panel -->
+      <path d="M -20,-10 L 0,5 L 0,25 L -20,10 Z" fill="url(#innerGradient)" opacity="0.7" />
+      
+      <!-- Right geometric panel -->
+      <path d="M 20,-10 L 0,5 L 0,25 L 20,10 Z" fill="url(#innerGradient)" opacity="0.8" />
+      
+      <!-- Top connecting elements -->
+      <path d="M 0,-25 L -10,-30 L 0,-35 L 10,-30 Z" fill="url(#accentGradient)" opacity="0.6" />
+      
+      <!-- Bottom connecting elements -->
+      <path d="M 0,25 L -10,30 L 0,35 L 10,30 Z" fill="url(#accentGradient)" opacity="0.6" />
+    </g>
+    
+    <!-- Inner wireframe details -->
+    <g stroke="url(#accentGradient)" stroke-width="1.5" fill="none" opacity="0.6">
+      <!-- Internal structure lines -->
+      <path d="M -20,-10 L 20,-10" />
+      <path d="M -20,10 L 20,10" />
+      <path d="M 0,-25 L 0,25" />
+      <!-- Diagonal connections -->
+      <path d="M -10,-17.5 L 10,-17.5" />
+      <path d="M -10,17.5 L 10,17.5" />
+    </g>
+    
+    <!-- Corner accent points -->
+    <g fill="url(#accentGradient)" filter="url(#glow)">
+      <circle cx="-40" cy="-25" r="3" opacity="0.8" />
+      <circle cx="40" cy="-25" r="3" opacity="0.8" />
+      <circle cx="-40" cy="25" r="3" opacity="0.8" />
+      <circle cx="40" cy="25" r="3" opacity="0.8" />
+      <circle cx="0" cy="-45" r="3" opacity="0.8" />
+      <circle cx="0" cy="45" r="3" opacity="0.8" />
+    </g>
+    
+    <!-- Central core (representing AI processing) -->
+    <g>
+      <circle cx="0" cy="-2.5" r="4" fill="url(#accentGradient)" opacity="0.9" filter="url(#glow)" />
+      <!-- Small internal elements -->
+      <g fill="#00ffcc" opacity="0.7">
+        <circle cx="-2" cy="-4" r="1" />
+        <circle cx="2" cy="-4" r="1" />
+        <circle cx="0" cy="-1" r="1" />
+      </g>
+    </g>
+    
+    <!-- Floating data points (representing active processing) -->
+    <g fill="url(#accentGradient)" opacity="0.5">
+      <circle cx="-30" cy="-35" r="1.5" />
+      <circle cx="30" cy="-35" r="1.5" />
+      <circle cx="-30" cy="35" r="1.5" />
+      <circle cx="30" cy="35" r="1.5" />
+      <circle cx="-50" cy="0" r="1" />
+      <circle cx="50" cy="0" r="1" />
+    </g>
+    
+  </g>
+  
+</svg>
