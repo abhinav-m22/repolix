@@ -26,29 +26,48 @@ model User {
 }
 
 model Project {
-    id       String   @id @default(cuid())
+    id        String   @id @default(cuid())
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 
-    name     String
-    githubUrl String
+    name        String
+    githubUrl   String
     githubToken String?
 
     deletedAt DateTime?
 
-    UserProject UserProject[] 
+    UserProject UserProject[]
+    commits     Commit[]
 }
 
 model UserProject {
-    id String @id @default(cuid())
+    id        String   @id @default(cuid())
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 
-    userId String
+    userId    String
     projectId String
 
-    user     User   @relation(fields: [userId], references: [id])
-    project  Project @relation(fields: [projectId], references: [id])
+    user    User    @relation(fields: [userId], references: [id])
+    project Project @relation(fields: [projectId], references: [id])
 
     @@unique([userId, projectId])
+}
+
+model Commit {
+    id        String   @id @default(cuid())
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    projectId String
+    project   Project @relation(fields: [projectId], references: [id])
+
+    message         String
+    hash            String
+    authorName      String
+    authorAvatarUrl String
+    date            DateTime
+
+    // AI generated summary
+    summary String
 }
