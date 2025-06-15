@@ -1,4 +1,5 @@
 import { GoogleGenerativeAI } from '@google/generative-ai';
+import { Document } from '@langchain/core/documents';
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
 const model = genAI.getGenerativeModel({
@@ -47,4 +48,39 @@ export const summarizeCommitAI = async (diff: string) => {
     ]);
 
     return response.response.text();
+}
+
+export async function summarizeCode(doc: Document) {
+    // console.log(`Summarizing code for ${doc.metadata.source}`);
+
+    try {
+        const code = doc.pageContent.slice(0, 10000); // Limit to 10,000 characters
+
+        const response = await model.generateContent([
+            `You are an expert programmer and your task is to summarize the following code in a concise manner.`,
+            `
+        You are provided with a code snippet that is part of a larger project.
+        Please provide a summary of the code, focusing on its main functionality and purpose.
+        Do not include any specific lines of code or examples in your summary. You are explaining the purpose of the  ${doc.metadata.source} file.
+
+        Here is the code: \n\n${code}
+        Provide the summary in no more than 100 words, using clear and professional language.
+        `,
+        ]);
+
+        return response.response.text();
+
+    } catch (error) {
+        return ''
+    }
+}
+
+export async function generateEmbedding(summary: string) {
+    const model = genAI.getGenerativeModel({
+        model: 'text-embedding-004'
+    })
+
+    const result = await model.embedContent(summary)
+    const embedding = result.embedding
+    return embedding.values
 }
