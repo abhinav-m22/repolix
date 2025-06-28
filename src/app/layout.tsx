@@ -15,6 +15,8 @@ import {
 } from '@clerk/nextjs'
 import { Toaster } from "sonner";
 
+import { Analytics } from '@vercel/analytics/next';
+
 export const metadata: Metadata = {
   title: "Repolix",
   description: "", // TODO: Add a description
@@ -35,6 +37,7 @@ export default function RootLayout({
         <body>
           <TRPCReactProvider>{children}</TRPCReactProvider>
           <Toaster richColors />
+          <Analytics />
         </body>
       </html>
     </ClerkProvider>
