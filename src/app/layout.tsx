@@ -1,7 +1,8 @@
 import "@/styles/globals.css";
 
 import { type Metadata } from "next";
-import { Geist } from "next/font/google";
+import { Inter } from "next/font/google";
+import { ThemeProvider } from "next-themes";
 
 import { TRPCReactProvider } from "@/trpc/react";
 
@@ -13,17 +14,17 @@ import {
   SignedOut,
   UserButton,
 } from '@clerk/nextjs'
-import { Toaster } from "sonner";
+import { CustomToaster } from "@/components/ui/custom-toast";
 
 import { Analytics } from '@vercel/analytics/next';
 
 export const metadata: Metadata = {
   title: "Repolix",
-  description: "", // TODO: Add a description
+  description: "AI-powered GitHub developer assistant", 
   icons: [{ rel: "icon", url: "/logo.svg" }],
 };
 
-const geist = Geist({
+const inter = Inter({
   subsets: ["latin"],
   variable: "--font-geist-sans",
 });
@@ -33,11 +34,20 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <ClerkProvider>
-      <html lang="en" className={`${geist.variable}`} suppressHydrationWarning>
-        <body>
-          <TRPCReactProvider>{children}</TRPCReactProvider>
-          <Toaster richColors />
-          <Analytics />
+      <html lang="en" className={inter.variable} suppressHydrationWarning>
+        <body className="min-h-screen antialiased">
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <TRPCReactProvider>
+              {children}
+            </TRPCReactProvider>
+            <CustomToaster />
+            <Analytics />
+          </ThemeProvider>
         </body>
       </html>
     </ClerkProvider>
