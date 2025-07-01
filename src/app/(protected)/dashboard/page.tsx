@@ -8,6 +8,7 @@ import QuestionCard from './question-card'
 import ArchiveButton from './archive-button'
 import InviteButton from './invite-button'
 import TeamMembers from './team-members'
+import ProjectStats from './project-stats'
 
 const Dashboard = () => {
     const { project } = useProject()
@@ -47,7 +48,7 @@ const Dashboard = () => {
             <div className='mt-4'>
                 <div className='grid grid-cols-1 gap-4 sm:grid-cols-5'>
                     <QuestionCard />
-                    MeetCard
+                    <ProjectStats />
                 </div>
             </div>
 

@@ -1,7 +1,7 @@
 'use client'
 
 import { Sidebar, SidebarContent, SidebarGroup, SidebarGroupContent, SidebarGroupLabel, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem, useSidebar } from "@/components/ui/sidebar"
-import { Bot, CreditCard, LayoutDashboard, Plus, Presentation } from "lucide-react"
+import { Bot, CreditCard, LayoutDashboard, Plus, Presentation, HelpCircle } from "lucide-react"
 import Link from "next/link"
 import { cn } from "@/lib/utils"
 import { usePathname } from "next/navigation"
@@ -21,14 +21,14 @@ const items = [
         icon: Bot,
     },
     {
-        title: "Meetings",
-        url: "/meetings",
-        icon: Presentation,
-    },
-    {
         title: "Billing",
         url: "/billing",
         icon: CreditCard,
+    },
+    {
+        title: "Onboarding",
+        url: "/onboarding",
+        icon: HelpCircle,
     }
 ]
 

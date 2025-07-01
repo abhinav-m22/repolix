@@ -46,6 +46,7 @@ model Project {
     commits     Commit[]
 
     sourceCodeEmbeddings SourceCodeEmbedding[]
+    onboardingSummary   OnboardingSummary?
 
     savedQuestions Question[]
 }
@@ -120,4 +121,24 @@ model StripeTransaction {
     user   User   @relation(fields: [userId], references: [id])
 
     credits Int
+}
+
+model OnboardingSummary {
+    id        String   @id @default(cuid())
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    about           String  @db.Text
+    keyFolders      Json   
+    setup           String  @db.Text
+    firstIssues     Json
+    architecture    String  @db.Text
+    codeStyle       String  @db.Text
+    testing         String  @db.Text
+    deployment      String  @db.Text
+    dependencies    Json
+    contributing    String  @db.Text
+
+    projectId String  @unique
+    project   Project @relation(fields: [projectId], references: [id])
 }
