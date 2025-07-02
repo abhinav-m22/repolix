@@ -73,16 +73,16 @@ const QuestionCard = () => {
   return (
     <>
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent className='max-w-4xl w-[95vw] max-h-[85vh] flex flex-col'>
-          <DialogHeader className='flex-shrink-0 border-b pb-4'>
+        <DialogContent className='max-w-4xl w-[95vw] max-h-[85vh] flex flex-col bg-black/30 backdrop-blur-xl border border-white/10'>
+          <DialogHeader className='flex-shrink-0 border-b border-white/10 pb-4'>
             <div className='flex justify-between items-center'>
-              <DialogTitle className='flex items-center gap-2'>
-                <div className="size-8 rounded-full bg-primary/10 flex items-center justify-center">
-                  <Bot className="size-4 text-primary" />
+              <DialogTitle className='flex items-center gap-2 text-white'>
+                <div className="size-8 rounded-full bg-[#3B82F6]/20 flex items-center justify-center">
+                  <Bot className="size-4 text-[#60A5FA]" />
                 </div>
                 <div className="flex flex-col">
                   <span>Repolix Answer</span>
-                  <div className="text-xs font-normal text-muted-foreground mt-0.5 flex items-center">
+                  <div className="text-xs font-normal text-white/60 mt-0.5 flex items-center">
                     <MessageSquare className="size-3 mr-1" />
                     {question.length > 60 ? question.substring(0, 57) + '...' : question}
                   </div>
@@ -90,11 +90,11 @@ const QuestionCard = () => {
               </DialogTitle>
               <div className="flex items-center gap-2">
                 <Button
-                  variant='secondary'
+                  variant='outline'
                   size="sm"
                   disabled={saveAnswer.isPending}
                   onClick={handleSaveAnswer}
-                  className="gap-1"
+                  className="gap-1 border-white/20 bg-white/10 text-white hover:bg-white/20"
                 >
                   <SaveIcon className="size-3.5" />
                   <span>Save</span>
@@ -102,7 +102,7 @@ const QuestionCard = () => {
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="rounded-full h-8 w-8"
+                  className="rounded-full h-8 w-8 text-white/70 hover:text-white hover:bg-white/10"
                   onClick={() => setOpen(false)}
                 >
                   <X className="h-4 w-4" />
@@ -114,11 +114,11 @@ const QuestionCard = () => {
           <div className='flex-1 overflow-y-auto my-4'>
             <div
               className='h-full rounded-lg p-6 scroll-smooth'
-              data-color-mode="light"
+              data-color-mode="dark"
             >
               <MDEditor.Markdown
                 source={answer || "Thinking..."}
-                className='prose prose-gray max-w-none dark:prose-invert leading-relaxed'
+                className='prose prose-invert max-w-none leading-relaxed text-white/90'
                 style={{
                   backgroundColor: 'transparent',
                   color: 'inherit',
@@ -127,8 +127,8 @@ const QuestionCard = () => {
               />
               <div className="h-4"></div>
               {fileReferences.length > 0 && (
-                <div className="border-t pt-4 mt-6">
-                  <h3 className="text-sm font-medium mb-3 text-muted-foreground flex items-center">
+                <div className="border-t border-white/10 pt-4 mt-6">
+                  <h3 className="text-sm font-medium mb-3 text-white/70 flex items-center">
                     <BookMarked className="size-4 mr-1.5" />
                     Code References
                   </h3>
@@ -136,10 +136,10 @@ const QuestionCard = () => {
                 </div>
               )}
               {loading && answer && (
-                <div className='flex items-center gap-2 mt-4 text-sm text-muted-foreground'>
+                <div className='flex items-center gap-2 mt-4 text-sm text-white/60'>
                   <div className='relative h-2 w-2'>
-                    <div className='animate-ping absolute inline-flex h-full w-full rounded-full bg-primary/40 opacity-75'></div>
-                    <div className='relative rounded-full h-2 w-2 bg-primary'></div>
+                    <div className='animate-ping absolute inline-flex h-full w-full rounded-full bg-[#3B82F6]/40 opacity-75'></div>
+                    <div className='relative rounded-full h-2 w-2 bg-[#3B82F6]'></div>
                   </div>
                   <span>Generating response...</span>
                 </div>
@@ -147,8 +147,8 @@ const QuestionCard = () => {
             </div>
           </div>
 
-          <DialogFooter className='flex-shrink-0 border-t pt-4'>
-            <KeyboardShortcut keys={["Esc"]} className="text-xs text-muted-foreground" />
+          <DialogFooter className='flex-shrink-0 border-t border-white/10 pt-4'>
+            <KeyboardShortcut keys={["Esc"]} className="text-xs text-white/60" />
           </DialogFooter>
         </DialogContent>
       </Dialog>
@@ -159,15 +159,15 @@ const QuestionCard = () => {
             placeholder='Ask about any part of your repository. E.g. "Which file handles user authentication?" or "How does the data flow work?"'
             value={question}
             onChange={e => setQuestion(e.target.value)}
-            className='min-h-[100px] resize-none'
+            className='min-h-[100px] resize-none bg-black/20 border-white/10 text-white placeholder:text-white/50 focus-visible:ring-[#3B82F6]'
             disabled={loading}
           />
           <div className="flex justify-between items-center">
-            <KeyboardShortcut keys={["Ctrl", "Enter"]} className="text-xs text-muted-foreground" />
+            <KeyboardShortcut keys={["Ctrl", "Enter"]} className="text-xs text-white/60" />
             <Button
               type='submit'
               disabled={loading || !question.trim()}
-              className='gap-2'
+              className='gap-2 bg-gradient-to-r from-[#3B82F6] to-[#60A5FA] text-white hover:opacity-90'
             >
               {loading ? (
                 <>

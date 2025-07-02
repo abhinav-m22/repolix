@@ -13,10 +13,10 @@ export function KeyboardShortcut({ keys, className }: KeyboardShortcutProps) {
     <div className={cn("flex items-center gap-0.5", className)}>
       {keys.map((key, index) => (
         <React.Fragment key={index}>
-          <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+          <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border border-white/10 bg-blue-950/70 px-1.5 font-mono text-[10px] font-medium text-cyan-400 opacity-100">
             {key}
           </kbd>
-          {index < keys.length - 1 && <span className="text-muted-foreground">+</span>}
+          {index < keys.length - 1 && <span className="text-white/50">+</span>}
         </React.Fragment>
       ))}
     </div>

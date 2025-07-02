@@ -41,14 +41,14 @@ export function AppSidebar() {
     const [hoveredProject, setHoveredProject] = useState<string | null>(null)
 
     return (
-        <Sidebar collapsible="icon" variant="floating" className="transition-all">
+        <Sidebar collapsible="icon" variant="floating" className="bg-black/30 backdrop-blur-lg border-r border-white/10 transition-all">
             <SidebarHeader>
                 <div className="flex items-center gap-2 cursor-pointer p-2">
-                    <div className="flex h-8 w-8 items-center justify-center rounded-md bg-primary">
+                    <div className="flex h-8 w-8 items-center justify-center rounded-md bg-gradient-to-r from-[#60A5FA] to-[#3B82F6] glow">
                         <Image src='/logo.svg' alt='Repolix' width={24} height={24} className="transition-transform duration-300 hover:scale-110" />
                     </div>
                     {open && (
-                        <h1 className="text-xl font-semibold text-primary/90 tracking-tight">
+                        <h1 className="text-xl font-semibold text-white tracking-tight">
                             Repolix
                         </h1>
                     )}
@@ -56,7 +56,7 @@ export function AppSidebar() {
             </SidebarHeader>
             <SidebarContent className="px-2">
                 <SidebarGroup>
-                    <SidebarGroupLabel className="text-xs font-medium text-muted-foreground">
+                    <SidebarGroupLabel className="text-xs font-medium text-white/60">
                         Application
                     </SidebarGroupLabel>
                     <SidebarGroupContent>
@@ -66,20 +66,20 @@ export function AppSidebar() {
                                 return (
                                     <SidebarMenuItem key={item.title}>
                                         <SidebarMenuButton asChild>
-                                            <Link 
-                                                href={item.url} 
+                                            <Link
+                                                href={item.url}
                                                 className={cn(
-                                                    "group flex items-center py-2 transition-all duration-200 hover:bg-accent/50",
-                                                    isActive && "bg-primary text-primary-foreground hover:bg-primary/90"
+                                                    "group flex items-center py-2 transition-all duration-200 hover:bg-white/10 rounded-lg",
+                                                    isActive && "bg-[#3B82F6] text-white hover:bg-[#3B82F6]/90"
                                                 )}
                                             >
                                                 <item.icon className={cn(
                                                     "h-4 w-4 mr-3 transition-transform group-hover:scale-110",
-                                                    isActive ? "text-primary-foreground" : "text-muted-foreground"
+                                                    isActive ? "text-white" : "text-white/60"
                                                 )} />
                                                 <span className={cn(
                                                     "font-medium",
-                                                    !isActive && "text-foreground"
+                                                    !isActive && "text-white"
                                                 )}>
                                                     {item.title}
                                                 </span>
@@ -95,10 +95,10 @@ export function AppSidebar() {
                     </SidebarGroupContent>
                 </SidebarGroup>
                 <SidebarGroup className="mt-6">
-                    <SidebarGroupLabel className="text-xs font-medium text-muted-foreground flex justify-between items-center">
+                    <SidebarGroupLabel className="text-xs font-medium text-white/60 flex justify-between items-center">
                         <span>Your Projects</span>
                         {open && (
-                            <Button variant="ghost" size="icon" className="h-5 w-5 rounded-full" asChild>
+                            <Button variant="ghost" size="icon" className="h-5 w-5 rounded-full text-white/60 hover:text-white hover:bg-white/10" asChild>
                                 <Link href='/create'>
                                     <Plus className="h-3.5 w-3.5" />
                                 </Link>
@@ -110,30 +110,30 @@ export function AppSidebar() {
                             {projects?.map((project) => {
                                 const isActive = project.id === projectId
                                 const isHovered = hoveredProject === project.id
-                                
+
                                 return (
                                     <SidebarMenuItem key={project.name}>
                                         <SidebarMenuButton asChild>
-                                            <div 
+                                            <div
                                                 onClick={() => setProjectId(project.id)}
                                                 onMouseEnter={() => setHoveredProject(project.id)}
                                                 onMouseLeave={() => setHoveredProject(null)}
                                                 className={cn(
-                                                    "group cursor-pointer transition-all duration-200 hover:bg-accent/50",
-                                                    isActive && "bg-accent/70"
+                                                    "group cursor-pointer transition-all duration-200 hover:bg-white/10 rounded-lg",
+                                                    isActive && "bg-white/20"
                                                 )}
                                             >
                                                 <div className={cn(
-                                                    'rounded-md border size-6 flex items-center justify-center text-xs font-semibold transition-all duration-200',
-                                                    isActive || isHovered 
-                                                        ? 'bg-primary text-primary-foreground scale-110' 
-                                                        : 'bg-card text-muted-foreground'
+                                                    'rounded-md border border-white/20 size-6 flex items-center justify-center text-xs font-semibold transition-all duration-200',
+                                                    isActive || isHovered
+                                                        ? 'bg-[#3B82F6] text-white scale-110 border-[#3B82F6]'
+                                                        : 'bg-black/30 text-white/60'
                                                 )}>
                                                     {project.name.charAt(0).toUpperCase()}
                                                 </div>
                                                 <span className={cn(
                                                     "font-medium",
-                                                    isActive ? "text-foreground" : "text-muted-foreground group-hover:text-foreground"
+                                                    isActive ? "text-white" : "text-white/60 group-hover:text-white"
                                                 )}>
                                                     {project.name}
                                                 </span>
@@ -149,7 +149,7 @@ export function AppSidebar() {
                                         <TooltipTrigger asChild>
                                             <SidebarMenuItem>
                                                 <Link href='/create'>
-                                                    <Button variant="outline" size="icon" className="h-8 w-8 rounded-md">
+                                                    <Button variant="outline" size="icon" className="h-8 w-8 rounded-md border-white/20 bg-black/20 text-white hover:bg-white/10 hover:text-white">
                                                         <Plus className="h-4 w-4" />
                                                     </Button>
                                                 </Link>
@@ -161,11 +161,11 @@ export function AppSidebar() {
                                     </Tooltip>
                                 </TooltipProvider>
                             )}
-                            
+
                             {open && (
                                 <SidebarMenuItem className="mt-2">
                                     <Link href='/create' className="w-full">
-                                        <Button variant="outline" className="w-full justify-start" size="sm">
+                                        <Button variant="outline" className="w-full justify-start border-white/20 bg-black/20 text-white hover:bg-white/10 hover:text-white" size="sm">
                                             <Plus className="mr-2 h-3.5 w-3.5" />
                                             Create New Project
                                         </Button>

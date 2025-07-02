@@ -53,58 +53,74 @@ const CreateProject = () => {
     const hasEnoughCredits = checkCredits.data?.userCredits ? checkCredits.data?.fileCount <= checkCredits.data?.userCredits : true
 
     return (
-        <div className="flex items-center gap-12 h-full justify-center">
-            <img src='/undraw.svg' className="h-56 w-auto" />
-            <div>
-                <div>
-                    <h1 className="font-semibold text-2xl">
+        <div className="flex flex-col md:flex-row items-center gap-12 h-full justify-center max-w-4xl mx-auto px-4">
+            <img src='/undraw.svg' className="h-56 w-auto hidden md:block" />
+            <div className="w-full md:w-auto">
+                <div className="mb-6">
+                    <h1 className="font-semibold text-2xl text-white">
                         Link your GitHub Repository
                     </h1>
-                    <p className="text-sm text-muted-foreground">
+                    <p className="text-sm text-white/70 mt-1">
                         Enter the GitHub repository URL and link it to Repolix
                     </p>
                 </div>
-                <div className="h-4"></div>
-                <div>
+                <div className="rounded-lg border border-white/10 bg-white/5 backdrop-blur-md shadow-sm p-6 w-full max-w-md">
                     <form onSubmit={handleSubmit(onSubmit)}>
-                        <Input
-                            {...register('projectName', { required: true })}
-                            placeholder="Project Name"
-                            required
-                        />
-                        <div className="h-2"></div>
-                        <Input
-                            {...register('repoUrl', { required: true })}
-                            placeholder="GitHub Repository URL"
-                            required
-                            type="url"
-                        />
-                        <div className="h-2"></div>
-                        <Input
-                            {...register('githubToken')}
-                            placeholder="GitHub Personal Access Token (optional)"
-                        />
+                        <div className="space-y-4">
+                            <div>
+                                <label className="text-sm font-medium text-white block mb-1.5">Project Name</label>
+                                <Input
+                                    {...register('projectName', { required: true })}
+                                    placeholder="My Awesome Project"
+                                    required
+                                    className="border-white/10 bg-blue-950/40 text-white placeholder:text-white/50 focus:border-cyan-500/50 focus:ring-cyan-500/20"
+                                />
+                            </div>
+                            
+                            <div>
+                                <label className="text-sm font-medium text-white block mb-1.5">GitHub Repository URL</label>
+                                <Input
+                                    {...register('repoUrl', { required: true })}
+                                    placeholder="https://github.com/username/repo"
+                                    required
+                                    type="url"
+                                    className="border-white/10 bg-blue-950/40 text-white placeholder:text-white/50 focus:border-cyan-500/50 focus:ring-cyan-500/20"
+                                />
+                            </div>
+                            
+                            <div>
+                                <label className="text-sm font-medium text-white block mb-1.5">GitHub Token (optional)</label>
+                                <Input
+                                    {...register('githubToken')}
+                                    placeholder="ghp_xxxxxxxxxxxxxxxx"
+                                    className="border-white/10 bg-blue-950/40 text-white placeholder:text-white/50 focus:border-cyan-500/50 focus:ring-cyan-500/20"
+                                />
+                                <p className="text-xs text-white/50 mt-1">For private repositories, provide a personal access token</p>
+                            </div>
+                        </div>
 
                         {!!checkCredits.data && (
-                            <>
-                                <div className="mt-4 bg-orange-50 py-2 rounded-md border border-orange-200 text-orange-700">
-                                    <div className="flex items-center gap-2">
-                                        <Info className="size-4" />
-                                        <p className="text-sm">You'll be charged <strong>{checkCredits.data?.fileCount} </strong>credits for this repository.</p>
-                                    </div>
-                                    <p className="text-sm text-blue-600 ml-6">You have <strong>{checkCredits.data?.userCredits} </strong>credits remaining.</p>
+                            <div className="mt-6 bg-blue-950/70 py-3 px-4 rounded-md border border-cyan-500/30 text-white">
+                                <div className="flex items-center gap-2">
+                                    <Info className="size-4 text-cyan-400" />
+                                    <p className="text-sm">You'll be charged <strong className="text-cyan-400">{checkCredits.data?.fileCount} </strong>credits for this repository.</p>
                                 </div>
-                            </>
+                                <p className="text-sm text-white/70 ml-6 mt-1">You have <strong className="text-cyan-400">{checkCredits.data?.userCredits} </strong>credits remaining.</p>
+                            </div>
                         )}
 
-                        <div className="h-4"></div>
-                        <Button type="submit" disabled={createProject.isPending || checkCredits.isPending || !hasEnoughCredits}>
-                            {!!checkCredits.data ? 'Create Project' : 'Check Credits'}
-                        </Button>
+                        <div className="mt-6">
+                            <Button 
+                                type="submit" 
+                                disabled={createProject.isPending || checkCredits.isPending || !hasEnoughCredits}
+                                className="w-full bg-blue-950/70 text-white border border-cyan-500/30 hover:bg-white/10 hover:text-cyan-400 hover:border-cyan-500/50 shadow-[0_0_10px_rgba(34,211,238,0.1)] hover:shadow-[0_0_15px_rgba(34,211,238,0.2)]"
+                            >
+                                {!!checkCredits.data ? 'Create Project' : 'Check Credits'}
+                            </Button>
+                        </div>
                     </form>
                 </div>
             </div>
-
         </div>
     )
 }

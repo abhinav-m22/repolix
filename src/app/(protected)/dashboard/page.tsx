@@ -20,18 +20,18 @@ const Dashboard = () => {
         <div className="space-y-6 animate-fadeIn">
             <div className="flex flex-col space-y-4">
                 <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
-                    <Card className="bg-primary text-primary-foreground w-full lg:max-w-md">
+                    <Card className="bg-gradient-to-r from-[#3B82F6] to-[#60A5FA] text-white w-full lg:max-w-md shadow-lg">
                         <CardContent className="p-4 flex items-center gap-4">
-                            <div className="rounded-full bg-primary-foreground/10 p-2 flex-shrink-0">
+                            <div className="rounded-full bg-white/10 p-2 flex-shrink-0">
                                 <Github className="h-5 w-5" />
                             </div>
                             <div className="overflow-hidden">
-                                <CardDescription className="text-primary-foreground/70">
+                                <CardDescription className="text-white/70">
                                     Connected Repository
                                 </CardDescription>
                                 <Link
                                     href={project?.githubUrl ?? '#'}
-                                    className="text-sm font-medium flex items-center hover:underline truncate"
+                                    className="text-sm font-medium flex items-center hover:underline truncate text-white"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                 >
