@@ -1,29 +1,155 @@
-# Create T3 App
+# Repolix: AI-Powered GitHub Repository Assistant
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+Repolix is a modern web application that transforms your GitHub workflow with AI-powered insights and repository analysis. It helps developers save time on code reviews, understand repositories faster, and collaborate more effectively.
 
-## What's next? How do I make an app with this?
+![Repolix Dashboard](/images/product-dashboard.png)
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
+## 🚀 Features
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
+- **AI Repository Assistant**: Ask questions about your codebase to get instant, contextual answers
+- **Intelligent Code Navigation**: Find and understand code faster with AI-powered search
+- **Commit Summaries**: Automatically generate summaries of code changes
+- **Repository Insights**: Get deep analytics and metrics on your projects
+- **Team Collaboration**: Invite team members to work together on projects
+- **Onboarding-Documentation**: Generate and maintain documentation that stays up-to-date for new joiners
 
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Drizzle](https://orm.drizzle.team)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
+## 📊 Technology Stack
 
-## Learn More
+Repolix is built with the [T3 Stack](https://create.t3.gg/), featuring:
 
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
+- **[Next.js](https://nextjs.org)** - React framework with server-side rendering
+- **[Clerk](https://clerk.dev)** - Authentication and user management
+- **[Prisma](https://prisma.io)** - Type-safe ORM for database operations
+- **[PostgreSQL](https://www.postgresql.org/)** - Database with vector extension for embeddings
+- **[tRPC](https://trpc.io)** - End-to-end typesafe API
+- **[Tailwind CSS](https://tailwindcss.com)** - Utility-first CSS framework
+- **[Framer Motion](https://www.framer.com/motion/)** - Animation library
+- **[Gemini AI](https://ai.google.dev/)** - Google's generative AI model
+- **[Stripe](https://stripe.com)** - Payment processing
 
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
+## 🏗️ System Architecture
 
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
+```mermaid
+flowchart TD
+    subgraph Client ["Client Layer"]
+        UI["Next.js Frontend"]
+        Auth["Clerk Authentication"]
+    end
 
-## How do I deploy this?
+    subgraph Backend ["Backend Infrastructure"]
+        API["tRPC API Layer"]
+        DB[("PostgreSQL Database")]
+        GitHub["GitHub Integration"]
+        Payment["Stripe Payment"]
+    end
 
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+    subgraph AILayer ["AI & Data Layer"]
+        subgraph VectorDB ["Vector Database"]
+            VectorStore["Vector Storage"]
+            Embeddings["Code Embeddings"]
+        end
+        
+        subgraph AIServices ["AI Services"]
+            RAG["Retrieval Augmented Generation"]
+            GeminiAI["Gemini AI Service"]
+            Summarization["AI Summarization"]
+        end
+        
+        subgraph DataProcessing ["Data Processing"]
+            CodeIndexing["Code Indexing"]
+            CommitAnalysis["Commit Analysis"]
+            ContextBuilding["Context Building"]
+        end
+    end
+
+    subgraph Features ["Core Features"]
+        RepoAssistant["AI Repository Assistant"]
+        CodeNavigation["Intelligent Code Navigation"]
+        CommitSummaries["Commit Summaries"]
+        RepoInsights["Repository Insights"]
+        TeamCollab["Team Collaboration"]
+        OnboardingDocs["Onboarding Documentation"]
+    end
+
+    UI --> Auth
+    Auth --> API
+    UI --> API
+
+    API --> DB
+    API --> GitHub
+    API --> Payment
+
+    Features --> API
+
+    GitHub -.->|Repository Data| CodeIndexing
+    GitHub -.->|Commit History| CommitAnalysis
+    
+    CodeIndexing --> Embeddings
+    Embeddings --> VectorStore
+    
+    CommitAnalysis --> Summarization
+    Summarization -.->|AI Generated Summaries| DB
+    
+    VectorStore --> ContextBuilding
+    ContextBuilding --> GeminiAI
+    
+    RAG --> VectorStore
+    RAG --> GeminiAI
+    
+    RepoAssistant -.->|Queries| RAG
+    OnboardingDocs -.->|Generate Docs| RAG
+    
+    GeminiAI -.->|Contextual Responses| RepoAssistant
+```
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js 18+ and npm/bun
+- PostgreSQL database with vector extension
+- GitHub OAuth application
+
+### Installation
+
+1. Clone the repository
+   ```bash
+   git clone https://github.com/yourusername/repolix.git
+   cd repolix
+   ```
+
+2. Install dependencies
+   ```bash
+   npm install
+   # or
+   bun install
+   ```
+
+3. Set up environment variables
+   ```bash
+   cp .env.example .env
+   # Edit .env with your configurations
+   ```
+
+4. Set up the database
+   ```bash
+   npm prisma db push
+   # or
+   bun prisma db push
+   ```
+
+5. Start the development server
+   ```bash
+   npm run dev
+   # or
+   bun dev
+   ```
+
+## 📚 Learn More
+
+- [T3 Stack Documentation](https://create.t3.gg/)
+- [Next.js Documentation](https://nextjs.org/docs)
+- [Prisma Documentation](https://www.prisma.io/docs)
+- [tRPC Documentation](https://trpc.io/docs)
+- [Clerk Documentation](https://clerk.dev/docs)
+
