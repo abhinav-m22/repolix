@@ -4,13 +4,12 @@ import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Github, Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useAuthDialog } from '@/components/providers/auth-dialog-provider';
 import { SignedIn, SignedOut, UserButton } from '@clerk/nextjs';
+import Link from 'next/link';
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const { openSignIn, openSignUp } = useAuthDialog();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -23,8 +22,6 @@ export function Navbar() {
 
   const navItems = [
     { label: 'Features', href: '#features' },
-    { label: 'Demo', href: '#demo' },
-    { label: 'Testimonials', href: '#testimonials' },
     { label: 'Pricing', href: '#pricing' },
   ];
 
@@ -32,16 +29,15 @@ export function Navbar() {
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled 
-          ? 'bg-background/80 backdrop-blur-md border-b border-border' 
-          : 'bg-transparent'
-      }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
+        ? 'bg-background/80 backdrop-blur-md border-b border-border'
+        : 'bg-transparent'
+        }`}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <motion.div 
+          <motion.div
             className="flex items-center space-x-2"
             whileHover={{ scale: 1.05 }}
           >
@@ -74,15 +70,18 @@ export function Navbar() {
               <UserButton afterSignOutUrl="/" />
             </SignedIn>
             <SignedOut>
-              <Button variant="ghost" size="sm" onClick={openSignIn}>
-                Sign In
+              <Button variant="ghost" size="sm" asChild>
+                <a href="https://github.com/abhinav-m22/repolix" target="_blank" rel="noopener noreferrer">
+                  <Github className="w-4 h-4 mr-2" />
+                  Star on GitHub
+                </a>
               </Button>
-              <Button 
-                size="sm" 
+              <Button
+                size="sm"
                 className="bg-gradient-to-r from-neon-cyan to-neon-purple hover:glow text-white shadow-lg"
-                onClick={openSignUp}
+                asChild
               >
-                Start Free
+                <Link href="/sign-up">Get Started</Link>
               </Button>
             </SignedOut>
           </div>
@@ -127,15 +126,18 @@ export function Navbar() {
                     <UserButton afterSignOutUrl="/" />
                   </SignedIn>
                   <SignedOut>
-                    <Button variant="ghost" size="sm" onClick={openSignIn}>
-                      Sign In
+                    <Button variant="ghost" size="sm" asChild>
+                      <a href="https://github.com/abhinav-m22/repolix" target="_blank" rel="noopener noreferrer">
+                        <Github className="w-4 h-4 mr-2" />
+                        Star on GitHub
+                      </a>
                     </Button>
-                    <Button 
-                      size="sm" 
+                    <Button
+                      size="sm"
                       className="bg-gradient-to-r from-neon-cyan to-neon-purple text-white shadow-lg"
-                      onClick={openSignUp}
+                      asChild
                     >
-                      Start Free
+                      <Link href="/sign-in">Get Started</Link>
                     </Button>
                   </SignedOut>
                 </div>

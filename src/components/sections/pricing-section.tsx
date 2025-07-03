@@ -6,11 +6,14 @@ import { Button } from '@/components/ui/button';
 import { Check, Zap, Users, Building, Crown } from 'lucide-react';
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import { SignIn } from '@clerk/nextjs';
+import { useRouter } from 'next/navigation';
 
 export function PricingSection() {
   const [isAnnual, setIsAnnual] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
+
+  const router = useRouter();
 
   const plans = [
     {
@@ -74,11 +77,11 @@ export function PricingSection() {
             <Crown className="w-6 h-6 text-neon-purple" />
             <span className="text-neon-purple font-medium">Pricing</span>
           </div>
-          
+
           <h2 className="text-3xl md:text-5xl font-bold mb-6">
             Choose Your <span className="text-gradient">Plan</span>
           </h2>
-          
+
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
             Start free and scale as your team grows. All plans include our core AI features.
           </p>
@@ -90,14 +93,12 @@ export function PricingSection() {
             </span>
             <button
               onClick={() => setIsAnnual(!isAnnual)}
-              className={`relative w-12 h-6 rounded-full transition-colors ${
-                isAnnual ? 'bg-neon-cyan' : 'bg-border'
-              }`}
+              className={`relative w-12 h-6 rounded-full transition-colors ${isAnnual ? 'bg-neon-cyan' : 'bg-border'
+                }`}
             >
               <div
-                className={`absolute top-1 w-4 h-4 bg-white rounded-full transition-transform ${
-                  isAnnual ? 'translate-x-7' : 'translate-x-1'
-                }`}
+                className={`absolute top-1 w-4 h-4 bg-white rounded-full transition-transform ${isAnnual ? 'translate-x-7' : 'translate-x-1'
+                  }`}
               />
             </button>
             <span className={`text-sm ${isAnnual ? 'text-foreground' : 'text-muted-foreground'}`}>
@@ -118,11 +119,10 @@ export function PricingSection() {
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: index * 0.2 }}
-              className={`relative glass rounded-2xl p-8 ${
-                plan.popular 
-                  ? 'border-2 border-neon-cyan glow-purple' 
-                  : 'border border-border/50'
-              }`}
+              className={`relative glass rounded-2xl p-8 ${plan.popular
+                ? 'border-2 border-neon-cyan glow-purple'
+                : 'border border-border/50'
+                }`}
             >
               {plan.popular && (
                 <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
@@ -136,7 +136,7 @@ export function PricingSection() {
                 <plan.icon className="w-12 h-12 text-neon-cyan mx-auto mb-4" />
                 <h3 className="text-2xl font-bold mb-2">{plan.name}</h3>
                 <p className="text-muted-foreground text-sm mb-4">{plan.description}</p>
-                
+
                 <div className="mb-4">
                   <span className="text-4xl font-bold">
                     ${isAnnual ? plan.price.annual : plan.price.monthly}
@@ -156,23 +156,16 @@ export function PricingSection() {
                 ))}
               </ul>
 
-              <Dialog>
-                <DialogTrigger asChild>
-                  <Button
-                    size="lg"
-                    className={`w-full ${
-                      plan.popular
-                        ? 'bg-gradient-to-r from-neon-cyan to-neon-purple hover:glow text-white shadow-lg'
-                        : 'bg-background border border-border hover:bg-muted text-foreground'
-                    }`}
-                  >
-                    {plan.cta}
-                  </Button>
-                </DialogTrigger>
-                <DialogContent className="max-w-md p-0 bg-background rounded-xl">
-                  <SignIn appearance={{ variables: { colorPrimary: '#a21caf' } }} />
-                </DialogContent>
-              </Dialog>
+              <Button
+                size="lg"
+                className={`w-full ${plan.popular
+                  ? 'bg-gradient-to-r from-neon-cyan to-neon-purple hover:glow text-white shadow-lg'
+                  : 'bg-background border border-border hover:bg-muted text-foreground'
+                  }`}
+                onClick={() => router.push('/sign-up')}
+              >
+                {plan.cta}
+              </Button>
             </motion.div>
           ))}
         </div>

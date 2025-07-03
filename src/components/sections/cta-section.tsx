@@ -28,9 +28,9 @@ export function CTASection() {
           <h2 className="text-3xl md:text-6xl font-bold mb-6">
             Start Building <span className="text-gradient">Smarter</span> Today
           </h2>
-          
+
           <p className="text-xl text-muted-foreground mb-12 max-w-2xl mx-auto">
-            Join thousands of developers who have already transformed their GitHub workflow with AI. 
+            Join thousands of developers who have already transformed their GitHub workflow with AI.
             Get started in less than 60 seconds.
           </p>
 
@@ -55,8 +55,7 @@ export function CTASection() {
               <Dialog>
                 <DialogTrigger asChild>
                   <Button size="lg" className="w-full bg-gradient-to-r from-neon-cyan to-neon-purple hover:glow text-white shadow-lg">
-                    <Github className="w-5 h-5 mr-2" />
-                    Connect GitHub Account
+                    Sign Up
                   </Button>
                 </DialogTrigger>
                 <DialogContent className="max-w-md p-0 bg-background rounded-xl">

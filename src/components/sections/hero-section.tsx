@@ -7,10 +7,11 @@ import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import { SignIn } from '@clerk/nextjs';
 import { Github } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
 export function HeroSection() {
   const [mounted, setMounted] = useState(false);
-
+  const router = useRouter();
   useEffect(() => {
     setMounted(true);
   }, []);
@@ -54,20 +55,13 @@ export function HeroSection() {
             transition={{ duration: 0.8, delay: 0.6 }}
             className="flex flex-col sm:flex-row gap-4 justify-center"
           >
-            <Dialog>
-              <DialogTrigger asChild>
-                <Button
-                  size="lg"
-                  className="glass-button glow px-8 py-6 text-lg font-medium"
-                >
-                  <Github className="w-5 h-5 mr-2" />
-                  Start Free with GitHub
-                </Button>
-              </DialogTrigger>
-              <DialogContent className="max-w-md p-0 bg-background/95 backdrop-blur-xl rounded-xl border border-white/10">
-                <SignIn appearance={{ variables: { colorPrimary: '#3B82F6' } }} />
-              </DialogContent>
-            </Dialog>
+            <Button
+              size="lg"
+              className="glass-button glow px-8 py-6 text-lg font-medium"
+              onClick={() => router.push('/sign-up')}
+            >
+              Let's Get Started!
+            </Button>
           </motion.div>
         </div>
 
