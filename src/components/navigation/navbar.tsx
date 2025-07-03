@@ -21,6 +21,8 @@ export function Navbar() {
   }, []);
 
   const navItems = [
+    { label: 'Home', href: '/' },
+    { label: 'About', href: '#about' },
     { label: 'Features', href: '#features' },
     { label: 'Pricing', href: '#pricing' },
   ];
@@ -44,7 +46,7 @@ export function Navbar() {
             <div className="w-8 h-8 bg-gradient-to-r from-neon-cyan to-neon-purple rounded-lg flex items-center justify-center">
               <Github className="w-5 h-5 text-white" />
             </div>
-            <span className="text-xl font-bold text-gradient">Repolix</span>
+            <span className="text-xl font-bold text-white text-gradient">Repolix</span>
           </motion.div>
 
           {/* Desktop Navigation */}
@@ -53,7 +55,7 @@ export function Navbar() {
               <motion.a
                 key={item.label}
                 href={item.href}
-                className="text-muted-foreground hover:text-foreground transition-colors relative group"
+                className="text-white hover:text-white transition-colors relative group"
                 whileHover={{ y: -2 }}
               >
                 {item.label}
@@ -71,7 +73,7 @@ export function Navbar() {
             </SignedIn>
             <SignedOut>
               <Button variant="ghost" size="sm" asChild>
-                <a href="https://github.com/abhinav-m22/repolix" target="_blank" rel="noopener noreferrer">
+                <a href="https://github.com/abhinav-m22/repolix" target="_blank" rel="noopener noreferrer" className="text-white">
                   <Github className="w-4 h-4 mr-2" />
                   Star on GitHub
                 </a>
@@ -93,7 +95,7 @@ export function Navbar() {
               size="sm"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
-              {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              {isMobileMenuOpen ? <X className="w-5 h-5 text-white" /> : <Menu className="w-5 h-5 text-white" />}
             </Button>
           </div>
         </div>
@@ -115,7 +117,7 @@ export function Navbar() {
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: index * 0.1 }}
-                    className="block text-muted-foreground hover:text-foreground transition-colors"
+                    className="block text-white hover:text-white transition-colors"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     {item.label}
@@ -127,7 +129,7 @@ export function Navbar() {
                   </SignedIn>
                   <SignedOut>
                     <Button variant="ghost" size="sm" asChild>
-                      <a href="https://github.com/abhinav-m22/repolix" target="_blank" rel="noopener noreferrer">
+                      <a href="https://github.com/abhinav-m22/repolix" target="_blank" rel="noopener noreferrer" className="text-white">
                         <Github className="w-4 h-4 mr-2" />
                         Star on GitHub
                       </a>

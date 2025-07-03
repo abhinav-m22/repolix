@@ -100,6 +100,13 @@
     --accent-bright: #60A5FA;
     --gradient-start: #60A5FA;
     --gradient-end: #A78BFA;
+    --neon-cyan: 210 100% 65%;
+    --neon-pink: 330 100% 70%;
+    --neon-purple: 270 100% 75%;
+  }
+
+  .dark {
+    color-scheme: dark;
   }
 
   * {
@@ -112,12 +119,16 @@
       rgb(26, 31, 60) 0%,
       rgb(10, 15, 28) 100%
     );
-    color: var(--foreground);
+    color: white;
     font-feature-settings: "rlig" 1, "calt" 1;
     min-height: 100vh;
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-size: cover;
+  }
+  
+  h1, h2, h3, h4, h5, h6, p, span, a, button {
+    color: white;
   }
 }
 
@@ -144,5 +155,11 @@
 
   .glass-button {
     @apply bg-white/10 hover:bg-white/20 backdrop-blur-lg border border-white/20 rounded-lg transition-all duration-200;
+  }
+  
+  .bg-grid-pattern {
+    background-image: linear-gradient(to right, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+                      linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+    background-size: 20px 20px;
   }
 }

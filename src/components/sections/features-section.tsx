@@ -1,22 +1,21 @@
 "use client";
 
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
-import { FeatureCard3D } from '@/components/ui/feature-card-3d';
-import { 
-  GitCommit, 
-  Eye, 
-  Brain, 
-  MessageSquareText, 
-  Video, 
-  Shield,
-  Zap,
-  Code
+import type { Variants } from 'framer-motion';
+import {
+  GitCommit,
+  Eye,
+  Brain,
+  MessageSquareText,
+  Users,
+  Sparkles
 } from 'lucide-react';
 
 export function FeaturesSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
+  const isInView = useInView(sectionRef, { once: true, margin: "-50px" });
+  const [hoveredFeature, setHoveredFeature] = useState<number | null>(null);
 
   const features = [
     {
@@ -29,6 +28,10 @@ export function FeaturesSection() {
         highlight: "AI detected 4 security improvements"
       },
       gradient: "from-blue-500 to-cyan-500",
+      bgGradient: "bg-gradient-to-br from-blue-500/10 to-cyan-500/10",
+      borderGradient: "border-blue-500/20",
+      iconColor: "text-blue-400",
+      iconBg: "bg-blue-500/10",
       delay: 0
     },
     {
@@ -41,6 +44,10 @@ export function FeaturesSection() {
         highlight: "Ready to merge with confidence"
       },
       gradient: "from-green-500 to-emerald-500",
+      bgGradient: "bg-gradient-to-br from-green-500/10 to-emerald-500/10",
+      borderGradient: "border-green-500/20",
+      iconColor: "text-green-400",
+      iconBg: "bg-green-500/10",
       delay: 0.2
     },
     {
@@ -53,6 +60,10 @@ export function FeaturesSection() {
         highlight: "Architecture patterns detected"
       },
       gradient: "from-purple-500 to-pink-500",
+      bgGradient: "bg-gradient-to-br from-purple-500/10 to-pink-500/10",
+      borderGradient: "border-purple-500/20",
+      iconColor: "text-purple-400",
+      iconBg: "bg-purple-500/10",
       delay: 0.4
     },
     {
@@ -65,101 +76,159 @@ export function FeaturesSection() {
         highlight: "Based on your codebase analysis"
       },
       gradient: "from-orange-500 to-red-500",
+      bgGradient: "bg-gradient-to-br from-orange-500/10 to-red-500/10",
+      borderGradient: "border-orange-500/20",
+      iconColor: "text-orange-400",
+      iconBg: "bg-orange-500/10",
       delay: 0.6
     },
     {
-      icon: Video,
-      title: "Meeting Transcription",
-      description: "Convert development meetings into actionable insights with automatic transcription, task extraction, and decision tracking.",
+      icon: Brain,
+      title: "AI Powered Developer Onboarding",
+      description: "Get a personalized onboarding experience with AI-powered guides, code examples, and best practices.",
       demo: {
-        title: "Meeting: Sprint Planning",
-        content: "📋 5 tasks identified\n⏰ 3 deadlines set\n👥 4 assignees noted\n📌 2 action items created",
-        highlight: "Automatically synced to project"
+        title: "Onboarding: Getting Started with Repolix",
+        content: "🚀 3-step setup guide\n📚 5 key concepts explained\n🔄 2 interactive tutorials\n💡 10+ tips for efficient use",
+        highlight: "Ready to start building smarter with AI"
       },
-      gradient: "from-teal-500 to-blue-500",
+      gradient: "from-indigo-500 to-violet-500",
+      bgGradient: "bg-gradient-to-br from-indigo-500/10 to-violet-500/10",
+      borderGradient: "border-indigo-500/20", 
+      iconColor: "text-white",
+      iconBg: "bg-indigo-500/10",
       delay: 0.8
     },
     {
-      icon: Shield,
-      title: "Security AI Scans",
-      description: "Proactive security analysis that identifies vulnerabilities, suggests fixes, and ensures compliance with security best practices.",
+      icon: Users,
+      title: "Team Collaboration", 
+      description: "Collaborate with your team members and manage your team members with ease.",
       demo: {
-        title: "Security Scan",
-        content: "🛡️ 0 critical issues\n⚠️ 2 minor suggestions\n✅ OWASP compliant\n🔐 Dependencies secure",
-        highlight: "Security score: 98/100"
+        title: "Team: Repolix Developers",
+        content: "👥 5 members\n🔄 2 active projects\n📊 3 repositories\n💬 100+ messages",
+        highlight: "Team collaboration at its best"
       },
-      gradient: "from-red-500 to-pink-500",
+      gradient: "from-teal-500 to-blue-500",
+      bgGradient: "bg-gradient-to-br from-teal-500/10 to-blue-500/10",
+      borderGradient: "border-teal-500/20",
+      iconColor: "text-white",
+      iconBg: "bg-teal-500/10",
       delay: 1.0
     }
   ];
 
+  const cardVariants: Variants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: (i: number) => ({
+      opacity: 1,
+      y: 0,
+      transition: {
+        delay: i * 0.1,
+        duration: 0.5,
+      }
+    }),
+    hover: {
+      y: -10,
+      transition: {
+        duration: 0.3,
+        type: "spring" as const,
+        stiffness: 300
+      }
+    }
+  };
+
   return (
-    <section id="features" ref={sectionRef} className="py-24 relative overflow-hidden">
-      {/* Accent glow */}
-      <div className="absolute inset-0 bg-gradient-radial from-[#3B82F6]/5 via-transparent to-transparent" />
+    <section id="features" ref={sectionRef} className="py-20 relative overflow-hidden">
+      {/* Background effects */}
+      <div className="absolute inset-0 bg-gradient-radial from-[#3B82F6]/10 via-transparent to-transparent" />
+      <div className="absolute top-0 left-0 w-full h-full bg-grid-pattern opacity-5" />
+      
+      {/* Animated particles or accents */}
+      <div className="absolute inset-0 overflow-hidden">
+        {[...Array(5)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute w-32 h-32 rounded-full"
+            style={{
+              background: `radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, rgba(59, 130, 246, 0) 70%)`,
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+            }}
+            animate={{
+              scale: [1, 1.2, 1],
+              opacity: [0.3, 0.8, 0.3],
+            }}
+            transition={{
+              duration: 8 + Math.random() * 5,
+              repeat: Infinity,
+              repeatType: "reverse",
+              delay: i * 2,
+            }}
+          />
+        ))}
+      </div>
 
       <div className="container mx-auto px-4 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
-          className="text-center mb-16"
+          className="text-center mb-12"
         >
-          <div className="flex items-center justify-center space-x-2 mb-4">
-            <Zap className="w-6 h-6 text-[#60A5FA]" />
-            <span className="text-[#60A5FA] font-medium">Powerful Features</span>
+          <div className="inline-flex items-center justify-center space-x-2 mb-4 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20">
+            <Sparkles className="w-4 h-4 text-blue-400" />
+            <span className="text-blue-400 font-medium text-sm">Powerful Features</span>
           </div>
-          
-          <h2 className="text-3xl md:text-5xl font-bold mb-6 text-white">
+
+          <h2 className="text-3xl md:text-5xl font-bold mb-4 text-white">
             Everything You Need for{' '}
-            <span className="text-gradient glow-text">Smarter Development</span>
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">Smarter Development</span>
           </h2>
-          
-          <p className="text-xl text-white/70 max-w-3xl mx-auto">
-            From commit analysis to security scans, Repolix provides comprehensive AI-powered tools 
+
+          <p className="text-lg text-white/70 max-w-2xl mx-auto">
+            From commit analysis to security scans, Repolix provides comprehensive AI-powered tools
             that transform how you work with code.
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6 lg:gap-8">
           {features.map((feature, index) => (
             <motion.div
               key={feature.title}
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="glass-card p-8 hover:glow transition-all duration-300"
+              custom={index}
+              initial="hidden"
+              animate={isInView ? "visible" : "hidden"}
+              variants={cardVariants}
+              whileHover="hover"
+              onHoverStart={() => setHoveredFeature(index)}
+              onHoverEnd={() => setHoveredFeature(null)}
+              className={`glass-card border ${feature.borderGradient} rounded-xl backdrop-blur-lg overflow-hidden shadow-lg transition-all duration-300`}
             >
-              <div className="flex flex-col h-full">
-                <feature.icon className={`w-10 h-10 ${feature.gradient} mb-6`} />
-                <h3 className="text-xl font-semibold mb-3 text-white">{feature.title}</h3>
-                <p className="text-white/70 mb-6 flex-grow">{feature.description}</p>
+              <div className={`h-1 ${feature.bgGradient}`}></div>
+              <div className="p-6 md:p-8 flex flex-col h-full">
+                <div className="flex items-start space-x-4 mb-5">
+                  <div className={`p-3 rounded-lg ${feature.iconBg} transition-transform group-hover:scale-110`}>
+                    <feature.icon className={`w-6 h-6 ${feature.iconColor}`} />
+                  </div>
+                  <h3 className="text-xl font-semibold text-white pt-1">{feature.title}</h3>
+                </div>
                 
-                {/* Feature demo/preview */}
-                <div className="glass rounded-lg p-4 text-sm text-white/60">
-                  <div className="font-medium text-[#60A5FA] mb-2">{feature.demo.title}</div>
-                  <pre className="whitespace-pre-wrap font-mono text-xs">{feature.demo.content}</pre>
-                  <div className="mt-2 text-xs text-[#60A5FA]/80">{feature.demo.highlight}</div>
+                <p className="text-white/70 mb-6 flex-grow leading-relaxed">{feature.description}</p>
+
+                {/* Feature demo/preview with animated border */}
+                <div className={`rounded-lg overflow-hidden ${hoveredFeature === index ? 'ring-1 ring-white/20' : ''} transition-all duration-300`}>
+                  <div className={`${feature.bgGradient} border border-white/10 rounded-lg p-4 text-sm`}>
+                    <div className={`font-medium ${feature.iconColor} mb-2`}>{feature.demo.title}</div>
+                    <pre className="whitespace-pre-wrap font-mono text-xs text-white/80 leading-relaxed">{feature.demo.content}</pre>
+                    <div className="mt-2 text-xs font-medium text-white/90 flex items-center">
+                      <Sparkles className={`w-3 h-3 ${feature.iconColor} mr-1.5`} />
+                      {feature.demo.highlight}
+                    </div>
+                  </div>
                 </div>
               </div>
             </motion.div>
           ))}
         </div>
-
-        {/* Bottom CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 1.2 }}
-          className="text-center mt-16"
-        >
-          <div className="inline-flex items-center space-x-2 glass-button px-6 py-3">
-            <Code className="w-5 h-5 text-[#60A5FA]" />
-            <span className="text-sm font-medium text-white/80">
-              All features work seamlessly with your existing GitHub workflow
-            </span>
-          </div>
-        </motion.div>
       </div>
     </section>
   );

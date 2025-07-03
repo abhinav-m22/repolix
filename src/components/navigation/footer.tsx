@@ -32,7 +32,7 @@ export function Footer() {
   };
 
   const socialLinks = [
-    { icon: Github, href: '#', label: 'GitHub' },
+    { icon: Github, href: 'https://github.com/abhinav-m22/repolix', label: 'GitHub' },
     { icon: Twitter, href: '#', label: 'Twitter' },
     { icon: Linkedin, href: '#', label: 'LinkedIn' },
     { icon: Mail, href: '#', label: 'Email' },
@@ -49,23 +49,23 @@ export function Footer() {
               <div className="w-8 h-8 bg-gradient-to-r from-neon-cyan to-neon-purple rounded-lg flex items-center justify-center">
                 <Github className="w-5 h-5 text-white" />
               </div>
-              <span className="text-xl font-bold text-gradient">Repolix</span>
+              <span className="text-xl font-bold text-white text-gradient">Repolix</span>
             </div>
-            <p className="text-muted-foreground text-sm mb-6 max-w-sm">
+            <p className="text-white/70 text-sm mb-6 max-w-sm">
               Transform your GitHub workflow with AI-powered tools for smarter development, 
               faster reviews, and better code insights.
             </p>
             
             {/* Newsletter signup */}
             <div className="space-y-3">
-              <p className="text-sm font-medium">Stay updated</p>
+              <p className="text-sm font-medium text-white">Stay updated</p>
               <div className="flex space-x-2">
                 <input
                   type="email"
                   placeholder="Enter your email"
-                  className="flex-1 px-3 py-2 bg-background border border-border rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-neon-cyan/50"
+                  className="flex-1 px-3 py-2 bg-background border border-border rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-neon-cyan/50 text-white"
                 />
-                <Button size="sm" className="bg-gradient-to-r from-neon-cyan to-neon-purple">
+                <Button size="sm" className="bg-gradient-to-r from-neon-cyan to-neon-purple text-white">
                   Subscribe
                 </Button>
               </div>
@@ -75,13 +75,13 @@ export function Footer() {
           {/* Links sections */}
           {Object.entries(footerLinks).map(([category, links]) => (
             <div key={category}>
-              <h3 className="font-semibold mb-4 text-sm">{category}</h3>
+              <h3 className="font-semibold mb-4 text-sm text-white">{category}</h3>
               <ul className="space-y-3">
                 {links.map((link) => (
                   <li key={link.label}>
                     <a
                       href={link.href}
-                      className="text-muted-foreground hover:text-foreground transition-colors text-sm"
+                      className="text-white/70 hover:text-white transition-colors text-sm"
                     >
                       {link.label}
                     </a>
@@ -95,10 +95,10 @@ export function Footer() {
         {/* Bottom section */}
         <div className="flex flex-col md:flex-row items-center justify-between pt-8 border-t border-border/50">
           <div className="flex items-center space-x-4 mb-4 md:mb-0">
-            <p className="text-muted-foreground text-sm">
+            <p className="text-white/70 text-sm">
               © 2025 Repolix. All rights reserved.
             </p>
-            <div className="flex items-center space-x-1 text-muted-foreground text-sm">
+            <div className="flex items-center space-x-1 text-white/70 text-sm">
               <span>Made with</span>
               <Heart className="w-4 h-4 text-red-500 fill-current" />
               <span>for developers</span>
@@ -111,8 +111,10 @@ export function Footer() {
               <a
                 key={social.label}
                 href={social.href}
-                className="text-muted-foreground hover:text-neon-cyan transition-colors"
+                className="text-white/70 hover:text-neon-cyan transition-colors"
                 aria-label={social.label}
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 <social.icon className="w-5 h-5" />
               </a>

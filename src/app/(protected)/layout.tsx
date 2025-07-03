@@ -2,7 +2,6 @@ import { SidebarProvider } from '@/components/ui/sidebar'
 import { UserButton } from '@clerk/nextjs'
 import React from 'react'
 import { AppSidebar } from './app-sidebar'
-import { ThemeToggle } from '@/components/ui/theme-toggle'
 import { cn } from '@/lib/utils'
 import { CommandMenu } from '@/components/ui/command-menu'
 
@@ -28,7 +27,6 @@ const SidebarLayout = ({ children } : Props) => {
                                 <CommandMenu />
                             </div>
                             <div className="flex items-center gap-2 sm:gap-4 ml-2">
-                                <ThemeToggle />
                                 <UserButton afterSignOutUrl="/" />
                             </div>
                         </div>

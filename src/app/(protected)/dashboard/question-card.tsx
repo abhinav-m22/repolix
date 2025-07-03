@@ -114,7 +114,6 @@ const QuestionCard = () => {
           <div className='flex-1 overflow-y-auto my-4'>
             <div
               className='h-full rounded-lg p-6 scroll-smooth'
-              data-color-mode="dark"
             >
               <MDEditor.Markdown
                 source={answer || "Thinking..."}
