@@ -44,7 +44,7 @@ export function Navbar() {
             whileHover={{ scale: 1.05 }}
           >
             <div className="w-8 h-8 bg-gradient-to-r from-neon-cyan to-neon-purple rounded-lg flex items-center justify-center">
-              <Github className="w-5 h-5 text-white" />
+              <img src="/logo.svg" alt="Repolix" width={32} height={32} />
             </div>
             <span className="text-xl font-bold text-white text-gradient">Repolix</span>
           </motion.div>
