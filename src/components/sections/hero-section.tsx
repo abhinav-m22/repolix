@@ -8,13 +8,62 @@ import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import { SignIn } from '@clerk/nextjs';
 import { Github } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
+import useEmblaCarousel from 'embla-carousel-react';
+import AutoPlay from 'embla-carousel-autoplay';
+import { cn } from '@/lib/utils';
 
 export function HeroSection() {
   const [mounted, setMounted] = useState(false);
   const router = useRouter();
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [autoplayPlugin] = useState(() => 
+    AutoPlay({ 
+      delay: 2000, 
+      stopOnInteraction: true, 
+      stopOnMouseEnter: true,
+      rootNode: (emblaRoot) => emblaRoot.parentElement 
+    })
+  );
+
+  const productImages = [
+    '/images/product-dashboard.png',
+    '/images/product-dashboard-2.png',
+    '/images/product-dashboard-3.png',
+    '/images/product-dashboard-4.png',
+  ];
+
+  const [emblaRef, emblaApi] = useEmblaCarousel(
+    { 
+      loop: true,
+      align: "center",
+    },
+    [autoplayPlugin]
+  );
+
   useEffect(() => {
     setMounted(true);
   }, []);
+
+  useEffect(() => {
+    if (!emblaApi) return;
+
+    emblaApi.on('select', () => {
+      setSelectedIndex(emblaApi.selectedScrollSnap());
+    });
+  }, [emblaApi]);
+
+  const scrollTo = (index: number) => {
+    emblaApi?.scrollTo(index);
+    // Resume autoplay after 5 seconds
+    setTimeout(() => {
+      autoplayPlugin.play();
+    }, 5000);
+  };
+
+  const handleMouseLeave = () => {
+    autoplayPlugin.play();
+  };
 
   if (!mounted) {
     return <div className="h-screen" />;
@@ -57,7 +106,7 @@ export function HeroSection() {
           >
             <Button
               size="lg"
-              className="glass-button glow px-8 py-6 text-lg font-medium"
+              className="glass-button glow px-8 py-6 text-lg font-medium cursor-pointer"
               onClick={() => router.push('/sign-up')}
             >
               Let's Get Started!
@@ -65,23 +114,52 @@ export function HeroSection() {
           </motion.div>
         </div>
 
-        {/* Product showcase */}
+        {/* Product showcase carousel */}
         <motion.div
           initial={{ opacity: 0, y: 60 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.8 }}
           className="relative max-w-5xl mx-auto"
         >
-          <div className="relative aspect-[16/9]">
-            <Image
-              src="/images/product-dashboard.png"
-              alt="Product Dashboard"
-              fill
-              className="object-contain rounded-xl shadow-2xl border border-white/10"
-              priority
-            />
-            {/* Glow effect behind the image */}
-            <div className="absolute inset-0 -z-10 bg-[#3B82F6]/20 blur-2xl rounded-full transform scale-95" />
+          <div 
+            className="overflow-hidden cursor-pointer" 
+            ref={emblaRef}
+            onMouseLeave={handleMouseLeave}
+          >
+            <div className="flex">
+              {productImages.map((image, index) => (
+                <div key={index} className="flex-[0_0_100%]">
+                  <div className="relative aspect-[16/9]">
+                    <Image
+                      src={image}
+                      alt={`Product Dashboard View ${index + 1}`}
+                      fill
+                      className="object-contain rounded-xl shadow-2xl border border-white/10"
+                      priority={index === 0}
+                    />
+                    {/* Glow effect behind the image */}
+                    <div className="absolute inset-0 -z-10 bg-[#3B82F6]/20 blur-2xl rounded-full transform scale-95" />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Dot indicators */}
+          <div className="flex justify-center gap-2 mt-4">
+            {productImages.map((_, index) => (
+              <button
+                key={index}
+                className={cn(
+                  "w-2.5 h-2.5 rounded-full transition-all duration-300 cursor-pointer",
+                  selectedIndex === index 
+                    ? "bg-blue-500 scale-125" 
+                    : "bg-gray-400/50 hover:bg-gray-400/80"
+                )}
+                onClick={() => scrollTo(index)}
+                aria-label={`Go to slide ${index + 1}`}
+              />
+            ))}
           </div>
         </motion.div>
       </div>

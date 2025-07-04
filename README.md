@@ -2,8 +2,6 @@
 
 Repolix is a modern web application that transforms your GitHub workflow with AI-powered insights and repository analysis. It helps developers save time on code reviews, understand repositories faster, and collaborate more effectively.
 
-![Repolix Dashboard](/images/product-dashboard.png)
-
 ## 🚀 Features
 
 - **AI Repository Assistant**: Ask questions about your codebase to get instant, contextual answers
