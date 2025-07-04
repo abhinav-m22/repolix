@@ -44,6 +44,24 @@ export default function RootLayout({
     <ClerkProvider
       appearance={{
         baseTheme: dark,
+        variables: {
+          colorPrimary: '#3B82F6',
+          colorBackground: 'rgb(10, 15, 28)',
+          colorInputBackground: 'hsl(217.2 32.6% 17.5%)',
+          colorInputText: 'hsl(210 40% 98%)',
+          colorTextOnPrimaryBackground: 'hsl(222.2 47.4% 11.2%)',
+          colorText: 'hsl(210 40% 98%)',
+          colorDanger: 'hsl(0 62.8% 30.6%)',
+          borderRadius: '0.75rem',
+          fontFamily: 'var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif',
+        },
+        elements: {
+          formButtonPrimary: 'bg-primary hover:bg-primary/90 text-primary-foreground',
+          card: 'glass-card backdrop-blur-lg',
+          footer: 'text-muted-foreground',
+          socialButtonsIconButton: 'glass-button',
+          formFieldInput: 'bg-input border-border',
+        }
       }}
     >
       <html lang="en" className={inter.variable} suppressHydrationWarning>

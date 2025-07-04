@@ -169,22 +169,6 @@ export function PricingSection() {
             </motion.div>
           ))}
         </div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 0.8 }}
-          className="text-center mt-16"
-        >
-          <p className="text-muted-foreground mb-4">
-            All plans include 14-day free trial • No credit card required
-          </p>
-          <div className="flex items-center justify-center space-x-8 text-sm text-muted-foreground">
-            <span>✓ Cancel anytime</span>
-            <span>✓ 99.9% uptime SLA</span>
-            <span>✓ SOC 2 compliant</span>
-          </div>
-        </motion.div>
       </div>
     </section>
   );

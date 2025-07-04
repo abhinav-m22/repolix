@@ -16,37 +16,39 @@ const TeamMembers = () => {
             <Button
                 size="icon"
                 variant="ghost"
-                className="relative hover:bg-gray-100 transition-colors duration-200 cursor-pointer"
+                className="relative hover:bg-white/5 transition-colors duration-200 group"
                 onClick={() => setOpen(true)}
-                aria-label="View all team members"
+                aria-label="Team members"
+                title="Team members"
             >
-                <Users className="w-5 h-5" />
+                <Users className="w-5 h-5 text-white" />
                 {members && members.length > 0 && (
-                    <span className="absolute -top-1 -right-1 bg-blue-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-medium">
+                    <span className="absolute -top-1 -right-1 bg-primary text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-medium">
                         {members.length}
                     </span>
                 )}
+                <span className="absolute -top-8 left-1/2 -translate-x-1/2 bg-black/80 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap">
+                    Team members
+                </span>
             </Button>
 
             {open && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
                     {/* Backdrop */}
                     <div
-                        className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+                        className="absolute inset-0 bg-black/80"
                         onClick={() => setOpen(false)}
                     />
 
                     {/* Modal */}
-                    <div className="relative bg-white rounded-2xl shadow-xl w-full max-w-2xl max-h-[90vh] overflow-hidden">
+                    <div className="relative bg-[#0A0F1C]/95 backdrop-blur-sm rounded-xl w-full max-w-md max-h-[90vh] overflow-hidden">
                         {/* Header */}
-                        <div className="flex items-center justify-between p-6 border-b border-gray-100">
+                        <div className="flex items-center justify-between p-6">
                             <div className="flex items-center gap-3">
-                                <div className="p-2 bg-blue-50 rounded-lg">
-                                    <Users className="w-5 h-5 text-blue-600" />
-                                </div>
+                                <Users className="w-6 h-6 text-white" />
                                 <div>
-                                    <h2 className="text-xl font-semibold text-gray-900">Team Members</h2>
-                                    <p className="text-sm text-gray-500">
+                                    <h2 className="text-xl text-white">Team Members</h2>
+                                    <p className="text-sm text-white/60">
                                         {members ? `${members.length} member${members.length !== 1 ? 's' : ''}` : 'Loading...'}
                                     </p>
                                 </div>
@@ -54,66 +56,56 @@ const TeamMembers = () => {
                             <Button
                                 variant="ghost"
                                 size="icon"
-                                className="h-8 w-8 rounded-full hover:bg-gray-100"
+                                className="h-8 w-8 rounded-full hover:bg-white/10"
                                 onClick={() => setOpen(false)}
-                                aria-label="Close"
                             >
-                                <XIcon className="w-4 h-4 text-gray-500" />
+                                <XIcon className="w-5 h-5 text-white/60" />
                             </Button>
                         </div>
 
                         {/* Content */}
-                        <div className="p-6">
+                        <div className="px-6 pb-6">
                             {isLoading ? (
-                                <div className="flex items-center justify-center py-12">
-                                    <div className="flex items-center gap-3 text-gray-500">
-                                        <div className="w-5 h-5 border-2 border-gray-300 border-t-blue-500 rounded-full animate-spin" />
-                                        <span>Loading team members...</span>
-                                    </div>
+                                <div className="flex items-center justify-center py-8">
+                                    <div className="w-5 h-5 border-2 border-white/20 border-t-white rounded-full animate-spin" />
                                 </div>
                             ) : (
-                                <div className="space-y-1 max-h-96 overflow-y-auto">
+                                <div className="space-y-4">
                                     {members && members.length > 0 ? (
-                                        members.map((member, index) => (
+                                        members.map((member) => (
                                             <div
                                                 key={member.id}
-                                                className="flex items-center gap-4 p-4 rounded-xl hover:bg-gray-50 transition-colors duration-200 group"
+                                                className="flex items-center gap-4"
                                             >
                                                 {/* Avatar */}
-                                                <div className="relative flex-shrink-0">
-                                                    <img
-                                                        src={member.user.imageUrl || `https://ui-avatars.com/api/?name=${encodeURIComponent(member.user.firstName + ' ' + member.user.lastName)}&background=e5e7eb&color=374151&size=48`}
-                                                        alt={`${member.user.firstName} ${member.user.lastName}`}
-                                                        className="w-12 h-12 rounded-full border-2 border-gray-200 object-cover"
-                                                    />
+                                                <div className="relative flex-shrink-0 w-10 h-10 rounded-full bg-white/10 flex items-center justify-center">
+                                                    {member.user.imageUrl ? (
+                                                        <img
+                                                            src={member.user.imageUrl}
+                                                            alt={`${member.user.firstName} ${member.user.lastName}`}
+                                                            className="w-10 h-10 rounded-full object-cover"
+                                                        />
+                                                    ) : (
+                                                        <span className="text-lg text-white">
+                                                            {member.user.firstName?.[0] || 'A'}
+                                                        </span>
+                                                    )}
                                                 </div>
 
                                                 {/* Info */}
                                                 <div className="flex-1 min-w-0">
-                                                    <div className="flex items-center gap-2">
-                                                        <h3 className="font-medium text-gray-900 truncate">
-                                                            {member.user.firstName} {member.user.lastName}
-                                                        </h3>
-                                                    </div>
-                                                    <div className="flex items-center gap-1 mt-1">
-                                                        <MailIcon className="w-3 h-3 text-gray-400" />
-                                                        <p className="text-sm text-gray-500 truncate">
-                                                            {member.user.email}
-                                                        </p>
-                                                    </div>
+                                                    <h3 className="font-medium text-white truncate">
+                                                        {member.user.firstName} {member.user.lastName}
+                                                    </h3>
+                                                    <p className="text-sm text-white/60 truncate">
+                                                        {member.user.email}
+                                                    </p>
                                                 </div>
                                             </div>
                                         ))
                                     ) : (
-                                        <div className="text-center py-12">
-                                            <div className="inline-flex items-center justify-center w-16 h-16 bg-gray-100 rounded-full mb-4">
-                                                <Users className="w-8 h-8 text-gray-400" />
-                                            </div>
-                                            <h3 className="text-lg font-medium text-gray-900 mb-2">No team members</h3>
-                                            <p className="text-gray-500">Invite team members to collaborate on this project.</p>
-                                            <Button className="mt-4" size="sm">
-                                                Invite Members
-                                            </Button>
+                                        <div className="text-center py-8">
+                                            <p className="text-white/60">No team members yet</p>
                                         </div>
                                     )}
                                 </div>

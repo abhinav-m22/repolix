@@ -34,10 +34,13 @@ const ArchiveButton = () => {
                 disabled={archiveProject.isPending}
                 size='sm'
                 variant='destructive'
-                className='cursor-pointer'
+                className='cursor-pointer relative hover:bg-white/5 transition-colors duration-200 group'
                 onClick={() => setOpen(true)}
             >
                 <ArchiveIcon />
+                <span className="absolute -top-8 left-1/2 -translate-x-1/2 bg-black/80 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap">
+                    Delete Project
+                </span>
             </Button>
             {open && (
                 <div className="fixed inset-0 flex items-center justify-center backdrop-blur-sm bg-white/20 z-50">
