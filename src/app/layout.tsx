@@ -8,11 +8,6 @@ import { TRPCReactProvider } from "@/trpc/react";
 
 import {
   ClerkProvider,
-  SignInButton,
-  SignUpButton,
-  SignedIn,
-  SignedOut,
-  UserButton,
 } from '@clerk/nextjs'
 import { dark } from "@clerk/themes";
 import { CustomToaster } from "@/components/ui/custom-toast";
@@ -21,16 +16,35 @@ import { AuthDialogProvider } from "@/components/providers/auth-dialog-provider"
 import { Analytics } from '@vercel/analytics/next';
 
 export const metadata: Metadata = {
-  title: 'Repolix - AI-Powered GitHub Developer Tool',
+  title: 'Repolix : AI-Powered GitHub Developer Tool',
   description: 'Transform your GitHub workflow with AI. Get instant commit summaries, smart PR reviews, and intelligent code insights.',
   keywords: 'AI, GitHub, developer tools, code review, commit analysis, repository intelligence',
   authors: [{ name: 'Repolix Team' }],
   openGraph: {
+    title: 'Repolix : AI-Powered GitHub Developer Tool',
+    description: 'Transform your GitHub workflow with AI. Get instant commit summaries, smart PR reviews, and intelligent code insights.',
+    url: 'https://repolix.vercel.app',
+    type: 'website',
+    images: [
+      {
+        url: 'https://opengraph.b-cdn.net/production/images/ccc81e66-ca4f-4211-83e1-bc2c7b1d6ac0.png?token=3TvIH046BU-OBmDYbYAJ343SeyvU-4hm1aDT4_xk2Jc&height=652&width=1200&expires=33287634574',
+        width: 1200,
+        height: 652,
+        alt: 'Repolix - AI GitHub Tool',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
     title: 'Repolix - AI-Powered GitHub Developer Tool',
     description: 'Transform your GitHub workflow with AI. Get instant commit summaries, smart PR reviews, and intelligent code insights.',
-    type: 'website',
+    images: [
+      'https://opengraph.b-cdn.net/production/images/ccc81e66-ca4f-4211-83e1-bc2c7b1d6ac0.png?token=3TvIH046BU-OBmDYbYAJ343SeyvU-4hm1aDT4_xk2Jc&height=652&width=1200&expires=33287634574',
+    ],
   },
+  metadataBase: new URL('https://repolix.vercel.app'),
 };
+
 
 const inter = Inter({
   subsets: ["latin"],
