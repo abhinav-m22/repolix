@@ -11,16 +11,16 @@ import {
   CommandSeparator,
 } from "@/components/ui/command"
 import { Button } from "@/components/ui/button"
-import { 
-  Bot, 
-  CreditCard, 
-  Github, 
-  HelpCircle, 
-  Home, 
-  LayoutDashboard, 
-  LogOut, 
-  Settings, 
-  User 
+import {
+  Bot,
+  CreditCard,
+  Github,
+  HelpCircle,
+  Home,
+  LayoutDashboard,
+  LogOut,
+  Settings,
+  User
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { useRouter } from "next/navigation"
@@ -52,35 +52,35 @@ export function CommandMenu() {
       <Button
         variant="outline"
         className={cn(
-          "relative w-full justify-start border border-white/10 bg-white/5 backdrop-blur-md text-sm text-muted-foreground sm:pr-12 md:w-96 lg:w-96",
+          "relative w-full justify-start border border-white/10 bg-white/5 backdrop-blur-md text-sm text-muted-foreground sm:pr-12 md:w-120 lg:w-120",
           "hover:bg-white/10 hover:border-cyan-500/30"
         )}
         onClick={() => setOpen(true)}
       >
         <span className="hidden lg:inline-flex">Search documentation, commands, and more...</span>
         <span className="inline-flex lg:hidden">Search...</span>
-        <KeyboardShortcut className="absolute right-2 top-2.5 hidden sm:flex" keys={["⌘", "K"]} />
+        <KeyboardShortcut className="absolute right-2 top-2.5 hidden sm:flex" keys={["Ctrl", "K"]} />
       </Button>
       <CommandDialog open={open} onOpenChange={setOpen}>
         <CommandInput placeholder="Type a command or search..." />
         <CommandList>
           <CommandEmpty>No results found.</CommandEmpty>
           <CommandGroup heading="Links" className="text-cyan-400">
-            <CommandItem 
+            <CommandItem
               onSelect={() => runCommand(() => router.push("/dashboard"))}
               className="hover:bg-white/10 aria-selected:bg-white/10"
             >
               <LayoutDashboard className="mr-2 h-4 w-4 text-cyan-400" />
               <span>Dashboard</span>
             </CommandItem>
-            <CommandItem 
+            <CommandItem
               onSelect={() => runCommand(() => router.push("/billing"))}
               className="hover:bg-white/10 aria-selected:bg-white/10"
             >
               <CreditCard className="mr-2 h-4 w-4 text-cyan-400" />
               <span>Billing</span>
             </CommandItem>
-            <CommandItem 
+            <CommandItem
               onSelect={() => runCommand(() => router.push("/"))}
               className="hover:bg-white/10 aria-selected:bg-white/10"
             >
@@ -90,14 +90,14 @@ export function CommandMenu() {
           </CommandGroup>
           <CommandSeparator className="bg-white/10" />
           <CommandGroup heading="Help" className="text-cyan-400">
-            <CommandItem 
+            <CommandItem
               onSelect={() => runCommand(() => window.open("https://github.com/abhinav-m22/repolix", "_blank"))}
               className="hover:bg-white/10 aria-selected:bg-white/10"
             >
               <Github className="mr-2 h-4 w-4 text-cyan-400" />
               <span>GitHub</span>
             </CommandItem>
-            <CommandItem 
+            <CommandItem
               onSelect={() => runCommand(() => router.push("/help"))}
               className="hover:bg-white/10 aria-selected:bg-white/10"
             >
@@ -107,14 +107,14 @@ export function CommandMenu() {
           </CommandGroup>
           <CommandSeparator className="bg-white/10" />
           <CommandGroup heading="Profile" className="text-cyan-400">
-            <CommandItem 
+            <CommandItem
               onSelect={() => runCommand(() => router.push("/profile"))}
               className="hover:bg-white/10 aria-selected:bg-white/10"
             >
               <User className="mr-2 h-4 w-4 text-cyan-400" />
               <span>Profile</span>
             </CommandItem>
-            <CommandItem 
+            <CommandItem
               onSelect={() => runCommand(() => router.push("/signout"))}
               className="hover:bg-white/10 aria-selected:bg-white/10"
             >
@@ -122,7 +122,7 @@ export function CommandMenu() {
               <span>Sign out</span>
             </CommandItem>
           </CommandGroup>
-          <CommandSeparator className="bg-white/10" />          
+          <CommandSeparator className="bg-white/10" />
         </CommandList>
       </CommandDialog>
     </>

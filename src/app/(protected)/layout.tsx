@@ -9,15 +9,15 @@ type Props = {
     children: React.ReactNode
 }
 
-const SidebarLayout = ({ children } : Props) => {
+const SidebarLayout = ({ children }: Props) => {
     return (
         <SidebarProvider>
             {/* Gradient background */}
             <div className="fixed inset-0 bg-gradient-radial from-[#1A1F3C] to-[#0A0F1C] -z-10" />
-            
+
             {/* Accent glows */}
             <div className="fixed inset-0 bg-gradient-radial from-[#3B82F6]/5 via-transparent to-transparent -z-10" />
-            
+
             <div className="flex h-screen overflow-hidden">
                 <AppSidebar />
                 <div className="flex-1 flex flex-col h-screen overflow-hidden">

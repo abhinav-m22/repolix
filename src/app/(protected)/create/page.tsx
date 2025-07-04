@@ -53,9 +53,9 @@ const CreateProject = () => {
     const hasEnoughCredits = checkCredits.data?.userCredits ? checkCredits.data?.fileCount <= checkCredits.data?.userCredits : true
 
     return (
-        <div className="flex flex-col md:flex-row items-center gap-12 h-full justify-center max-w-4xl mx-auto px-4">
-            <img src='/undraw.svg' className="h-56 w-auto hidden md:block" />
-            <div className="w-full md:w-auto">
+        <div className="w-full max-w-7xl mx-auto px-4 py-8 grid grid-cols-1 md:grid-cols-2 gap-12 items-center animate-fadeIn">
+            <img src='/undraw.svg' className="h-56 w-auto justify-self-center hidden md:block" />
+            <div className="w-full">
                 <div className="mb-6">
                     <h1 className="font-semibold text-2xl text-white">
                         Link your GitHub Repository
@@ -76,7 +76,7 @@ const CreateProject = () => {
                                     className="border-white/10 bg-blue-950/40 text-white placeholder:text-white/50 focus:border-cyan-500/50 focus:ring-cyan-500/20"
                                 />
                             </div>
-                            
+
                             <div>
                                 <label className="text-sm font-medium text-white block mb-1.5">GitHub Repository URL</label>
                                 <Input
@@ -87,7 +87,7 @@ const CreateProject = () => {
                                     className="border-white/10 bg-blue-950/40 text-white placeholder:text-white/50 focus:border-cyan-500/50 focus:ring-cyan-500/20"
                                 />
                             </div>
-                            
+
                             <div>
                                 <label className="text-sm font-medium text-white block mb-1.5">GitHub Token (optional)</label>
                                 <Input
@@ -110,8 +110,8 @@ const CreateProject = () => {
                         )}
 
                         <div className="mt-6">
-                            <Button 
-                                type="submit" 
+                            <Button
+                                type="submit"
                                 disabled={createProject.isPending || checkCredits.isPending || !hasEnoughCredits}
                                 className="w-full bg-blue-950/70 text-white border border-cyan-500/30 hover:bg-white/10 hover:text-cyan-400 hover:border-cyan-500/50 shadow-[0_0_10px_rgba(34,211,238,0.1)] hover:shadow-[0_0_15px_rgba(34,211,238,0.2)]"
                             >

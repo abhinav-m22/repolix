@@ -14,6 +14,7 @@ import {
   SignedOut,
   UserButton,
 } from '@clerk/nextjs'
+import { dark } from "@clerk/themes";
 import { CustomToaster } from "@/components/ui/custom-toast";
 import { AuthDialogProvider } from "@/components/providers/auth-dialog-provider";
 
@@ -40,7 +41,11 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <ClerkProvider>
+    <ClerkProvider
+      appearance={{
+        baseTheme: dark,
+      }}
+    >
       <html lang="en" className={inter.variable} suppressHydrationWarning>
         <body className="min-h-screen antialiased">
           <ThemeProvider
